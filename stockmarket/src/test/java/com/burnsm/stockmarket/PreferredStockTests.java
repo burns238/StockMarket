@@ -13,7 +13,7 @@ class PreferredStockTests {
 	
     @Test
     void calculateDividendYield_zeroPriceNonZeroFixedDividend() {
-    	assertEquals(SampleStocks.GIN_PREFERRED_STOCK.calculateDividendYield(0), 0.0, DELTA);
+    	assertEquals(SampleStocks.ginPreferredStock.calculateDividendYield(0), 0.0, DELTA);
     }
     
     @Test
@@ -28,7 +28,7 @@ class PreferredStockTests {
     
     @Test
     void calculateDividendYield_OnePriceNonZeroFixedDividend() {
-    	assertEquals(SampleStocks.GIN_PREFERRED_STOCK.calculateDividendYield(1), 2, DELTA);
+    	assertEquals(SampleStocks.ginPreferredStock.calculateDividendYield(1), 2, DELTA);
     }
     
     @Test
@@ -43,7 +43,7 @@ class PreferredStockTests {
     
     @Test
     void calculateDividendYield_TwoPriceNonZeroFixedDividend() {
-    	assertEquals(SampleStocks.GIN_PREFERRED_STOCK.calculateDividendYield(2), 1, DELTA);
+    	assertEquals(SampleStocks.ginPreferredStock.calculateDividendYield(2), 1, DELTA);
     }
     
     @Test
@@ -58,7 +58,7 @@ class PreferredStockTests {
     
     @Test
     void calculateDividendYield_LargePriceNonZeroFixedDividend() {
-    	assertEquals(SampleStocks.GIN_PREFERRED_STOCK.calculateDividendYield(LARGE_PRICE), 
+    	assertEquals(SampleStocks.ginPreferredStock.calculateDividendYield(LARGE_PRICE), 
     			     2/LARGE_PRICE, DELTA);
     }
     
@@ -75,7 +75,7 @@ class PreferredStockTests {
     
     @Test
     void calculatePER_zeroPriceNonZeroDividend() {
-    	assertEquals(SampleStocks.GIN_PREFERRED_STOCK.calculatePER(0), 0.0, DELTA);
+    	assertEquals(SampleStocks.ginPreferredStock.calculatePER(0), 0.0, DELTA);
     }
     
     @Test
@@ -90,7 +90,7 @@ class PreferredStockTests {
     
     @Test
     void calculatePER_onePriceNonZeroDividend() {
-    	assertEquals(SampleStocks.GIN_PREFERRED_STOCK.calculatePER(1), 1.0/2.0, DELTA);
+    	assertEquals(SampleStocks.ginPreferredStock.calculatePER(1), 1.0/2.0, DELTA);
     }
     
     @Test
@@ -105,7 +105,7 @@ class PreferredStockTests {
     
     @Test
     void calculatePER_largePriceNonZeroDividend() {
-    	assertEquals(SampleStocks.GIN_PREFERRED_STOCK.calculatePER(LARGE_PRICE), LARGE_PRICE/2.0, DELTA);
+    	assertEquals(SampleStocks.ginPreferredStock.calculatePER(LARGE_PRICE), LARGE_PRICE/2.0, DELTA);
     }
     
     @Test

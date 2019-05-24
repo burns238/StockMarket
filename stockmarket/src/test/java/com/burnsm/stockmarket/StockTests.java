@@ -85,8 +85,8 @@ class StockTests {
 				new Trade(LocalDateTime.now(), 30, BuyOrSell.BUY, 3.0),
 				new Trade(LocalDateTime.now(), 40, BuyOrSell.BUY, 2.0),
 				new Trade(LocalDateTime.now(), 50, BuyOrSell.BUY, 1.0));
-    	SampleStocks.TEA_COMMON_STOCK.setTrades(newTrades);
-    	assertEquals(SampleStocks.TEA_COMMON_STOCK.getTrades().size(),5);
+    	SampleStocks.teaCommonStock.setTrades(newTrades);
+    	assertEquals(SampleStocks.teaCommonStock.getTrades().size(),5);
     }
     
     
