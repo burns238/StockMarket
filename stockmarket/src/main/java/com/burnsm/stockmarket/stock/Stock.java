@@ -21,29 +21,43 @@ public abstract class Stock {
 		this.trades = List.of();
 	}
 	
-	public abstract double calculateDividendYield(double price);
+	public abstract double getDividendValue();
 	
-	public abstract double calculatePER(double price);
+	public double calculateDividendYield(double price) {
+		if (price != 0) {
+			return this.getDividendValue() / price;
+		} else {
+			return 0.0;
+		}
+	}
 	
-	public List<Trade> getTradesFromTheLastFifteenMinutes() {
+	public double calculatePER(double price) {
+		if (this.getDividendValue() != 0) {
+			return price / this.getDividendValue();
+		} else {
+			return 0.0;
+		}
+	}
+	
+	private List<Trade> getTradesFromTheLastFifteenMinutes() {
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime fifteenMinutesAgo = now.minusMinutes(15);
 		Predicate<Trade> recentTrades = t -> t.getTimestamp().compareTo(fifteenMinutesAgo) >= 0;
 		
-		return this.getTrades().parallelStream()
+		return this.getTrades().stream()
 					.filter(recentTrades)
 					.collect(Collectors.toList());
 	}
 	
 	public double calculateVolumeWeightedStockPrice() {
 		
-		List<Trade> trades = getTradesFromTheLastFifteenMinutes();
+		List<Trade> recentTrades = getTradesFromTheLastFifteenMinutes();
 		
-		double priceByQuantity = trades.parallelStream()
+		double priceByQuantity = recentTrades.stream()
 				.map(t -> t.getTradedPrice() * t.getQuantity())
 				.reduce(0.0, (subtotal, v) -> subtotal + v);
 		
-		double quantity = trades.parallelStream()
+		double quantity = recentTrades.stream()
 				.mapToInt(t -> t.getQuantity()).sum();
 		
 		if (quantity != 0) {
@@ -93,7 +107,7 @@ public abstract class Stock {
         return tradeList;  
     }  
     
-	public void createTrade(Trade trade) {
+	public void recordTrade(Trade trade) {
 		List<Trade> tradeList = this.getTrades();
 		tradeList.add(trade);
 		this.setTrades(tradeList);			

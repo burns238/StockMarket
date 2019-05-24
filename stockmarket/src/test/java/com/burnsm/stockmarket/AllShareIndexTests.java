@@ -45,21 +45,21 @@ public class AllShareIndexTests {
     void calculateAllShareIndex_oneStockNoTrades() {
     	CommonStock stock = new CommonStock("TST", 20, 12); 
     	List<Stock> stocks = List.of(stock);
-    	assertEquals(AllShareIndex.calculateAllShareIndex(stocks), 0);
+    	assertEquals(AllShareIndex.calculateAllShareIndex(stocks), 1);
     }
     
     @Test
     void calculateAllShareIndex_oneStockOneTradesZeroPrice() {
     	CommonStock stock = new CommonStock("TST", 20, 12); 
-    	stock.createTrade(new Trade(10, BuyOrSell.BUY, 0));
+    	stock.recordTrade(new Trade(10, BuyOrSell.BUY, 0));
     	List<Stock> stocks = List.of(stock);
-    	assertEquals(AllShareIndex.calculateAllShareIndex(stocks), 0);
+    	assertEquals(AllShareIndex.calculateAllShareIndex(stocks), 1);
     }
     
     @Test
     void calculateAllShareIndex_oneStockOneTradesNonZeroPrice() {
     	CommonStock stock = new CommonStock("TST", 20, 12); 
-    	stock.createTrade(new Trade(10, BuyOrSell.BUY, 3));
+    	stock.recordTrade(new Trade(10, BuyOrSell.BUY, 3));
     	List<Stock> stocks = List.of(stock);
     	assertEquals(AllShareIndex.calculateAllShareIndex(stocks), 3);
     }
@@ -67,9 +67,9 @@ public class AllShareIndexTests {
     @Test
     void calculateAllShareIndex_twoStocksSamePrice() {
     	CommonStock stock1 = new CommonStock("TST", 20, 12); 
-    	stock1.createTrade(new Trade(10, BuyOrSell.BUY, 3));
+    	stock1.recordTrade(new Trade(10, BuyOrSell.BUY, 3));
     	CommonStock stock2 = new CommonStock("TS2", 20, 12); 
-    	stock2.createTrade(new Trade(10, BuyOrSell.BUY, 3));
+    	stock2.recordTrade(new Trade(10, BuyOrSell.BUY, 3));
     	List<Stock> stocks = List.of(stock1, stock2);
     	assertEquals(AllShareIndex.calculateAllShareIndex(stocks), 3);
     }
@@ -77,9 +77,9 @@ public class AllShareIndexTests {
     @Test
     void calculateAllShareIndex_twoStocksVaryingPrices() {
     	CommonStock stock1 = new CommonStock("TST", 20, 12); 
-    	stock1.createTrade(new Trade(10, BuyOrSell.BUY, 5));
+    	stock1.recordTrade(new Trade(10, BuyOrSell.BUY, 5));
     	CommonStock stock2 = new CommonStock("TS2", 20, 12); 
-    	stock2.createTrade(new Trade(10, BuyOrSell.BUY, 3));
+    	stock2.recordTrade(new Trade(10, BuyOrSell.BUY, 3));
     	List<Stock> stocks = List.of(stock1, stock2);
     	
     	double expectedOutcome = AllShareIndex.nthRoot(15, 2);
@@ -90,15 +90,15 @@ public class AllShareIndexTests {
     @Test
     void calculateAllShareIndex_fiveStocksVaryingPrices() {
     	CommonStock stock1 = new CommonStock("TST", 20, 12); 
-    	stock1.createTrade(new Trade(10, BuyOrSell.BUY, 5));
+    	stock1.recordTrade(new Trade(10, BuyOrSell.BUY, 5));
     	CommonStock stock2 = new CommonStock("TS2", 20, 12); 
-    	stock2.createTrade(new Trade(10, BuyOrSell.BUY, 4));
+    	stock2.recordTrade(new Trade(10, BuyOrSell.BUY, 4));
     	CommonStock stock3 = new CommonStock("TST", 20, 12); 
-    	stock3.createTrade(new Trade(10, BuyOrSell.BUY, 3));
+    	stock3.recordTrade(new Trade(10, BuyOrSell.BUY, 3));
     	CommonStock stock4 = new CommonStock("TS2", 20, 12); 
-    	stock4.createTrade(new Trade(10, BuyOrSell.BUY, 2));
+    	stock4.recordTrade(new Trade(10, BuyOrSell.BUY, 2));
     	CommonStock stock5 = new CommonStock("TST", 20, 12); 
-    	stock5.createTrade(new Trade(10, BuyOrSell.BUY, 1));
+    	stock5.recordTrade(new Trade(10, BuyOrSell.BUY, 1));
     	List<Stock> stocks = List.of(stock1, stock2, stock3, stock4, stock5);
     	
     	double expectedOutcome = AllShareIndex.nthRoot((5*4*3*2*1), 5);

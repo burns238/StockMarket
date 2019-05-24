@@ -9,22 +9,6 @@ public class PreferredStock extends Stock {
 		this.setFixedDividendPercentage(fixedDividendPercentage);
 	}
 	
-	public double calculateDividendYield(double price) {
-		if (price != 0) {
-			return getDividendValue() / price;
-		} else {
-			return 0.0;
-		}
-	}
-	
-	public double calculatePER(double price) {
-		if (this.getDividendValue() != 0) {
-			return price / getDividendValue();
-		} else {
-			return 0.0;
-		}
-	}
-	
 	public double getDividendValue() {
 		return (this.getFixedDividendPercentage()/100) * this.getParValue();
 	}

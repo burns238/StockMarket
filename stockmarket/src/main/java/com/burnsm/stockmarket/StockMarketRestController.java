@@ -31,8 +31,7 @@ public class StockMarketRestController {
 	
 	@GetMapping(path="/stock")
 	public List<Stock> retrieveAllStocks() {
-		List<Stock> stocks = new ArrayList<>(SampleStocks.getAllStocks().values());
-		return stocks;
+		return new ArrayList<>(SampleStocks.getAllStocks().values());
 	}
 	
 	@GetMapping(path="/stock/{id}")
@@ -69,11 +68,15 @@ public class StockMarketRestController {
 	
 	@PostMapping(path="/stock/{id}/trade/")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createTrade(@PathVariable String id, @RequestBody Trade trade) {
+	public void recordTrade(@PathVariable String id, @RequestBody Trade trade) {
+		if (trade.getBuyOrSell() == null) {
+			throw new IllegalArgumentException("buyOrSell must be either BUY or SELL");
+		}
+		
 		Map<String, Stock> stockMap = SampleStocks.getAllStocks();
 		if (stockMap.containsKey(id)) {
 			Stock stock = stockMap.get(id);
-			stock.createTrade(trade);
+			stock.recordTrade(trade);
 		} else {
 			throw new IllegalArgumentException("Stock not found");
 		}
