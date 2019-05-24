@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import com.burnsm.stockmarket.stock.SampleStocks;
+
 class CommonStockTests {
 	
 	private double LARGE_PRICE = 12345;

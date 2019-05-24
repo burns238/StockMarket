@@ -1,4 +1,4 @@
-package com.burnsm.stockmarket;
+package com.burnsm.stockmarket.stock;
 
 public class CommonStock extends Stock {
 

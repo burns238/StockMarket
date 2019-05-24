@@ -1,4 +1,4 @@
-package com.burnsm.stockmarket;
+package com.burnsm.stockmarket.stock;
 
 import java.util.HashMap;
 import java.util.Map;

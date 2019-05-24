@@ -1,4 +1,4 @@
-package com.burnsm.stockmarket;
+package com.burnsm.stockmarket.stock;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-abstract class Stock {
+public abstract class Stock {
 	
 	private String stockSymbol;
 	private double lastDividend;
