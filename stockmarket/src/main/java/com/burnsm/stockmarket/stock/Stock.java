@@ -40,11 +40,11 @@ public abstract class Stock {
 		List<Trade> trades = getTradesFromTheLastFifteenMinutes();
 		
 		double priceByQuantity = trades.parallelStream()
-									.map(t -> t.getTradedPrice() * t.getQuantity())
-									.reduce(0.0, (subtotal, v) -> subtotal + v);
+				.map(t -> t.getTradedPrice() * t.getQuantity())
+				.reduce(0.0, (subtotal, v) -> subtotal + v);
 		
 		double quantity = trades.parallelStream()
-							.mapToInt(t -> t.getQuantity()).sum();
+				.mapToInt(t -> t.getQuantity()).sum();
 		
 		if (quantity != 0) {
 			return priceByQuantity / quantity;
