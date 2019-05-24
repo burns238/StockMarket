@@ -3,55 +3,55 @@ package com.burnsm.stockmarket.stock;
 import java.time.LocalDateTime;
 
 public class Trade {
-	
-	private LocalDateTime timestamp;
-	private int quantity;
-	private BuyOrSell buyOrSell;
-	private double tradedPrice;
-	
-	public Trade(int quantity, BuyOrSell buyOrSell, double tradedPrice) {
-		super();
-		this.timestamp = LocalDateTime.now();
-		this.quantity = quantity;
-		this.buyOrSell = buyOrSell;
-		this.tradedPrice = tradedPrice;
-	}
-	
-	public Trade() {
-		super();
-		this.timestamp = LocalDateTime.now();
-	}
 
-	public LocalDateTime getTimestamp() {
-		return timestamp;
-	}
+    private LocalDateTime timestamp;
+    private int quantity;
+    private BuyOrSell buyOrSell;
+    private double tradedPrice;
 
-	public void setTimestamp(LocalDateTime timestamp) {
-		this.timestamp = timestamp;
-	}
+    public Trade(int quantity, BuyOrSell buyOrSell, double tradedPrice) {
+        super();
+        this.timestamp = LocalDateTime.now();
+        this.quantity = quantity;
+        this.buyOrSell = buyOrSell;
+        this.tradedPrice = tradedPrice;
+    }
 
-	public int getQuantity() {
-		return quantity;
-	}
+    public Trade() {
+        super();
+        this.timestamp = LocalDateTime.now();
+    }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
 
-	public BuyOrSell getBuyOrSell() {
-		return buyOrSell;
-	}
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 
-	public void setBuyOrSell(BuyOrSell buyOrSell) {
-		this.buyOrSell = buyOrSell;
-	}
+    public int getQuantity() {
+        return quantity;
+    }
 
-	public double getTradedPrice() {
-		return tradedPrice;
-	}
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-	public void setTradedPrice(double tradedPrice) {
-		this.tradedPrice = tradedPrice;
-	}
-	
+    public BuyOrSell getBuyOrSell() {
+        return buyOrSell;
+    }
+
+    public void setBuyOrSell(BuyOrSell buyOrSell) {
+        this.buyOrSell = buyOrSell;
+    }
+
+    public double getTradedPrice() {
+        return tradedPrice;
+    }
+
+    public void setTradedPrice(double tradedPrice) {
+        this.tradedPrice = tradedPrice;
+    }
+
 }
