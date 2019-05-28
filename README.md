@@ -4,7 +4,7 @@ A super simple stock market implementation allowing users to record trades and d
 PE Ratios, and volume weighted prices for given sample stocks.
 
 ## Requires
-JDK 9
+JDK 8
 
 ## REST Endpoints
 
