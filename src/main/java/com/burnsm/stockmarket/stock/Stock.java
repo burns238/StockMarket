@@ -18,7 +18,7 @@ public abstract class Stock {
         this.stockSymbol = stockSymbol;
         this.lastDividend = lastDividend;
         this.parValue = parValue;
-        this.trades = List.of();
+        this.trades = new ArrayList<Trade>();
     }
 
     public abstract double getDividendValue();

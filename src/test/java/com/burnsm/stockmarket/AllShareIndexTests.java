@@ -2,6 +2,7 @@ package com.burnsm.stockmarket;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ public class AllShareIndexTests {
     @Test
     void calculateAllShareIndex_oneStockNoTrades() {
         CommonStock stock = new CommonStock("TST", 20, 12);
-        List<Stock> stocks = List.of(stock);
+        List<Stock> stocks = Arrays.asList(stock);
         assertEquals(AllShareIndex.calculateAllShareIndex(stocks), 1);
     }
 
@@ -52,7 +53,7 @@ public class AllShareIndexTests {
     void calculateAllShareIndex_oneStockOneTradesZeroPrice() {
         CommonStock stock = new CommonStock("TST", 20, 12);
         stock.recordTrade(new Trade(10, BuyOrSell.BUY, 0));
-        List<Stock> stocks = List.of(stock);
+        List<Stock> stocks = Arrays.asList(stock);
         assertEquals(AllShareIndex.calculateAllShareIndex(stocks), 1);
     }
 
@@ -60,7 +61,7 @@ public class AllShareIndexTests {
     void calculateAllShareIndex_oneStockOneTradesNonZeroPrice() {
         CommonStock stock = new CommonStock("TST", 20, 12);
         stock.recordTrade(new Trade(10, BuyOrSell.BUY, 3));
-        List<Stock> stocks = List.of(stock);
+        List<Stock> stocks = Arrays.asList(stock);
         assertEquals(AllShareIndex.calculateAllShareIndex(stocks), 3);
     }
 
@@ -70,7 +71,7 @@ public class AllShareIndexTests {
         stock1.recordTrade(new Trade(10, BuyOrSell.BUY, 3));
         CommonStock stock2 = new CommonStock("TS2", 20, 12);
         stock2.recordTrade(new Trade(10, BuyOrSell.BUY, 3));
-        List<Stock> stocks = List.of(stock1, stock2);
+        List<Stock> stocks = Arrays.asList(stock1, stock2);
         assertEquals(AllShareIndex.calculateAllShareIndex(stocks), 3);
     }
 
@@ -80,7 +81,7 @@ public class AllShareIndexTests {
         stock1.recordTrade(new Trade(10, BuyOrSell.BUY, 5));
         CommonStock stock2 = new CommonStock("TS2", 20, 12);
         stock2.recordTrade(new Trade(10, BuyOrSell.BUY, 3));
-        List<Stock> stocks = List.of(stock1, stock2);
+        List<Stock> stocks = Arrays.asList(stock1, stock2);
 
         double expectedOutcome = AllShareIndex.nthRoot(15, 2);
 
@@ -99,7 +100,7 @@ public class AllShareIndexTests {
         stock4.recordTrade(new Trade(10, BuyOrSell.BUY, 2));
         CommonStock stock5 = new CommonStock("TST", 20, 12);
         stock5.recordTrade(new Trade(10, BuyOrSell.BUY, 1));
-        List<Stock> stocks = List.of(stock1, stock2, stock3, stock4, stock5);
+        List<Stock> stocks = Arrays.asList(stock1, stock2, stock3, stock4, stock5);
 
         double expectedOutcome = AllShareIndex.nthRoot((5 * 4 * 3 * 2 * 1), 5);
 

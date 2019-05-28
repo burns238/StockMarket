@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -71,7 +72,7 @@ class StockTests {
 
     @Test
     void calculateVolumeWeightedStockPrice_fiveTradesVaryingQuantities() {
-        List<Trade> newTrades = List.of(new Trade(10, BuyOrSell.BUY, 5.0), new Trade(20, BuyOrSell.BUY, 4.0),
+        List<Trade> newTrades = Arrays.asList(new Trade(10, BuyOrSell.BUY, 5.0), new Trade(20, BuyOrSell.BUY, 4.0),
                 new Trade(30, BuyOrSell.BUY, 3.0), new Trade(40, BuyOrSell.BUY, 2.0),
                 new Trade(50, BuyOrSell.BUY, 1.0));
         testStock.setTrades(newTrades);
@@ -92,7 +93,7 @@ class StockTests {
         Trade recentTrade1 = new Trade(30, BuyOrSell.BUY, 3.0);
         Trade recentTrade2 = new Trade(40, BuyOrSell.BUY, 2.0);
         Trade recentTrade3 = new Trade(50, BuyOrSell.BUY, 1.0);
-        List<Trade> newTrades = List.of(oldTrade1, oldTrade2, recentTrade1, recentTrade2, recentTrade3);
+        List<Trade> newTrades = Arrays.asList(oldTrade1, oldTrade2, recentTrade1, recentTrade2, recentTrade3);
         testStock.setTrades(newTrades);
 
         double expectedPrice = ((90.0) + (80.0) + (50.0)) / (120.0);
@@ -115,7 +116,7 @@ class StockTests {
         oldTrade4.setTimestamp(thirtyMinutesAgo);
         Trade oldTrade5 = new Trade(50, BuyOrSell.BUY, 1.0);
         oldTrade5.setTimestamp(thirtyMinutesAgo);
-        List<Trade> newTrades = List.of(oldTrade1, oldTrade2, oldTrade3, oldTrade4, oldTrade5);
+        List<Trade> newTrades = Arrays.asList(oldTrade1, oldTrade2, oldTrade3, oldTrade4, oldTrade5);
         testStock.setTrades(newTrades);
 
         assertEquals(testStock.calculateVolumeWeightedStockPrice(), 0, DELTA);
