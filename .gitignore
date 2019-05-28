@@ -29,4 +29,4 @@ local.properties
 *.mylyn/*
 *.plugins/*
 .markers
-
+target/
