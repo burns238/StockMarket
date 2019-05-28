@@ -25,6 +25,11 @@ import com.burnsm.stockmarket.stock.Trade;
 public class StockMarketRestController {
 
     @ExceptionHandler
+    void handleNotFoundException(NotFoundException e, HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.NOT_FOUND.value());
+    }
+
+    @ExceptionHandler
     void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
@@ -36,34 +41,19 @@ public class StockMarketRestController {
 
     @GetMapping(path = "/stock/{id}/")
     public Stock retrieveStock(@PathVariable String id) {
-        Map<String, Stock> stockMap = SampleStocks.getAllStocks();
-        if (stockMap.containsKey(id)) {
-            return stockMap.get(id);
-        } else {
-            throw new IllegalArgumentException("Stock not found");
-        }
+        return getStockFromSampleStocks(id);
     }
 
     @GetMapping(path = "/stock/{id}/dividendyield/{price}/")
     public double getDividendYield(@PathVariable String id, @PathVariable double price) {
-        Map<String, Stock> stockMap = SampleStocks.getAllStocks();
-        if (stockMap.containsKey(id)) {
-            Stock stock = stockMap.get(id);
-            return stock.calculateDividendYield(price);
-        } else {
-            throw new IllegalArgumentException("Stock not found");
-        }
+        Stock stock = getStockFromSampleStocks(id);
+        return stock.calculateDividendYield(price);
     }
 
     @GetMapping(path = "/stock/{id}/peratio/{price}/")
     public double getPERatio(@PathVariable String id, @PathVariable double price) {
-        Map<String, Stock> stockMap = SampleStocks.getAllStocks();
-        if (stockMap.containsKey(id)) {
-            Stock stock = stockMap.get(id);
-            return stock.calculatePER(price);
-        } else {
-            throw new IllegalArgumentException("Stock not found");
-        }
+        Stock stock = getStockFromSampleStocks(id);
+        return stock.calculatePER(price);
     }
 
     @PostMapping(path = "/stock/{id}/trade/")
@@ -73,30 +63,29 @@ public class StockMarketRestController {
             throw new IllegalArgumentException("buyOrSell must be either BUY or SELL");
         }
 
-        Map<String, Stock> stockMap = SampleStocks.getAllStocks();
-        if (stockMap.containsKey(id)) {
-            Stock stock = stockMap.get(id);
-            stock.recordTrade(trade);
-        } else {
-            throw new IllegalArgumentException("Stock not found");
-        }
+        Stock stock = getStockFromSampleStocks(id);
+        stock.recordTrade(trade);
     }
 
     @GetMapping(path = "/stock/{id}/volumeweightedstockprice/")
     public double getVolumeWeightedStockPrice(@PathVariable String id) {
-        Map<String, Stock> stockMap = SampleStocks.getAllStocks();
-        if (stockMap.containsKey(id)) {
-            Stock stock = stockMap.get(id);
-            return stock.calculateVolumeWeightedStockPrice();
-        } else {
-            throw new IllegalArgumentException("Stock not found");
-        }
+        Stock stock = getStockFromSampleStocks(id);
+        return stock.calculateVolumeWeightedStockPrice();
     }
 
     @GetMapping(path = "/stock/allshareindex/")
     public double getAllShareIndex() {
         List<Stock> stocks = new ArrayList<>(SampleStocks.getAllStocks().values());
         return AllShareIndex.calculateAllShareIndex(stocks);
+    }
+
+    public Stock getStockFromSampleStocks(String id) {
+        Map<String, Stock> stockMap = SampleStocks.getAllStocks();
+        if (stockMap.containsKey(id)) {
+            return stockMap.get(id);
+        } else {
+            throw new NotFoundException("Stock not found");
+        }
     }
 
 }
