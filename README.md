@@ -3,6 +3,9 @@
 A super simple stock market implementation allowing users to record trades and determine dividend yields, 
 PE Ratios, and volume weighted prices for given sample stocks.
 
+## Requires
+JDK 9
+
 ## REST Endpoints
 
 Once the application is running, the following endpoints are accessible from localhost port 8080.
